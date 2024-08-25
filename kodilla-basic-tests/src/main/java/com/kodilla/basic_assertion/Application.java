@@ -5,6 +5,7 @@ public class Application {
         Calculator calculator = new Calculator();
         int a = 5;
         int b = 8;
+        double c = 4.0;
         int sumResult = calculator.sum(a, b);
         boolean correct1 = ResultChecker.assertEquals(13, sumResult);
         if (correct1) {
@@ -19,12 +20,12 @@ public class Application {
         } else {
             System.out.println("Metoda subtract nie działa poprawnie dla liczb " + a + " i " + b);
         }
-        int squareResult = calculator.square(a);
-        boolean correct3 = ResultChecker.assertEquals(25, squareResult);
+        double squareResult = calculator.square(c);
+        boolean correct3 = ResultChecker.assertEquals(16.0, squareResult, 0.00001);
         if (correct3) {
-            System.out.println("Metoda square działa poprawnie dla liczby " + a);
+            System.out.println("Metoda square działa poprawnie dla liczby " + c);
         } else {
-            System.out.println("Metoda square nie działa poprawnie dla liczby " + a );
+            System.out.println("Metoda square nie działa poprawnie dla liczby " + c);
         }
     }
 }
