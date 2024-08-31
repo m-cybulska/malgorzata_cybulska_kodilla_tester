@@ -13,8 +13,7 @@ public class CarsListApplication {
     public static void main(String[] args) {
         List<Car> cars = new ArrayList<>();
         cars.add(new Honda(130, 20, 15));
-        Renault renault = new Renault(150, 25, 15);
-        cars.add(renault);
+        cars.add(new Renault(150, 25, 15));
         cars.add(new Volkswagen(180, 30, 20));
 
         for (Car car : cars) {
@@ -22,6 +21,8 @@ public class CarsListApplication {
         }
 
         cars.remove(2);
+
+        Renault renault = new Renault(150, 25, 15);
         cars.remove(renault);
 
         for (Car car : cars) {
