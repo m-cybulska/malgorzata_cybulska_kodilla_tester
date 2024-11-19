@@ -13,7 +13,7 @@ public class Cashier {
             cashSlot.dispense(amount);
         } else {
             cashSlot.dispense(0);
-            System.out.println("Insufficient funds");
+            wallet.setErrorMessage("Cannot withdraw more than the balance");
         }
     }
 }
