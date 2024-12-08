@@ -12,7 +12,6 @@ public class ApplicationTest {
 
     @Test
     public void shouldDisplayStudentAndTeacherNameIfTeacherIsPresent() {
-
         List<Student> students = new ArrayList<>();
         students.add(new Student("Luke Newman", new Teacher("Peter Goodman")));
 
@@ -28,7 +27,6 @@ public class ApplicationTest {
 
     @Test
     public void shouldDisplayStudentNameAndUndefinedIfTeacherIsAbsent() {
-
         List<Student> students = new ArrayList<>();
         students.add(new Student("Mary Hill", null));
 
@@ -46,5 +44,44 @@ public class ApplicationTest {
         }
 
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void shouldHandleMultipleStudentsWithMixedTeacherPresence() {
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Luke Newman", new Teacher("Peter Goodman")));
+        students.add(new Student("Mary Hill", null));
+        students.add(new Student("Blake Moon", new Teacher("Hannah Walker")));
+        students.add(new Student("Jane Black", null));
+
+        String expectedResult = "Student: Luke Newman, teacher: Peter Goodman\n" +
+                "Student: Mary Hill, teacher: <undefined>\n" +
+                "Student: Blake Moon, teacher: Hannah Walker\n" +
+                "Student: Jane Black, teacher: <undefined>";
+
+        StringBuilder result = new StringBuilder();
+        for (Student student : students) {
+            Optional<Teacher> teacher = Optional.ofNullable(student.getTeacher());
+            String teacherName = teacher.map(Teacher::getName).orElse("<undefined>");
+            result.append("Student: ").append(student.getName()).append(", teacher: ").append(teacherName).append("\n");
+        }
+
+        assertEquals(expectedResult, result.toString().trim());
+    }
+
+    @Test
+    public void shouldReturnEmptyOutputForEmptyStudentList() {
+        List<Student> students = new ArrayList<>();
+
+        String expectedResult = "";
+
+        StringBuilder result = new StringBuilder();
+        for (Student student : students) {
+            Optional<Teacher> teacher = Optional.ofNullable(student.getTeacher());
+            String teacherName = teacher.map(Teacher::getName).orElse("<undefined>");
+            result.append("Student: ").append(student.getName()).append(", teacher: ").append(teacherName).append("\n");
+        }
+
+        assertEquals(expectedResult, result.toString().trim());
     }
 }
